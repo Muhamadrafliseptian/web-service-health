@@ -17,11 +17,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $guarded = [''];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -42,4 +38,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function getKonsumen(){
+        return $this->belongsTo("App\Models\Konsumen", "id", "user_id");
+    }
+
+    public function getRole()
+    {
+        return $this->belongsTo("App\Models\Role", "id_role", "id_role");
+    }
 }
